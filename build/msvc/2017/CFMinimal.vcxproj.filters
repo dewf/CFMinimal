@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\CF">
+      <UniqueIdentifier>{3f78a43d-ce03-479b-ba84-ef90d44d09eb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\AbstractRangeManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CF\CFArray.cpp">
+      <Filter>Source Files\CF</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CF\CFAttributedString.cpp">
+      <Filter>Source Files\CF</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CF\CFBoolean.cpp">
+      <Filter>Source Files\CF</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CF\CFDictionary.cpp">
+      <Filter>Source Files\CF</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CF\CFMisc.cpp">
+      <Filter>Source Files\CF</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CF\CFMutableArray.cpp">
+      <Filter>Source Files\CF</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CF\CFMutableAttributedString.cpp">
+      <Filter>Source Files\CF</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CF\CFMutableDictionary.cpp">
+      <Filter>Source Files\CF</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CF\CFMutableString.cpp">
+      <Filter>Source Files\CF</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CF\CFNumber.cpp">
+      <Filter>Source Files\CF</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CF\CFObject.cpp">
+      <Filter>Source Files\CF</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CF\CFString.cpp">
+      <Filter>Source Files\CF</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\CF\CFURL.cpp">
+      <Filter>Source Files\CF</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\source\AbstractRangeManager.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\CF\CFArray.h">
+      <Filter>Source Files\CF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\CF\CFAttributedString.h">
+      <Filter>Source Files\CF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\CF\CFBoolean.h">
+      <Filter>Source Files\CF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\CF\CFDictionary.h">
+      <Filter>Source Files\CF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\CF\CFMisc.h">
+      <Filter>Source Files\CF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\CF\CFMutableArray.h">
+      <Filter>Source Files\CF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\CF\CFMutableAttributedString.h">
+      <Filter>Source Files\CF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\CF\CFMutableDictionary.h">
+      <Filter>Source Files\CF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\CF\CFMutableString.h">
+      <Filter>Source Files\CF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\CF\CFNumber.h">
+      <Filter>Source Files\CF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\CF\CFObject.h">
+      <Filter>Source Files\CF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\CF\CFString.h">
+      <Filter>Source Files\CF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\CF\CFTypes.h">
+      <Filter>Source Files\CF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\CF\CFURL.h">
+      <Filter>Source Files\CF</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
