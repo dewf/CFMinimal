@@ -8,11 +8,12 @@
 #endif
 
 #ifdef CF_PLATFORM_WINDOWS
-#   ifdef CFMINIMAL_EXPORTS
-#       define CFMINIMAL_API __declspec(dllexport)
-#   else
-#       define CFMINIMAL_API __declspec(dllimport)
-#   endif
+//#   ifdef CFMINIMAL_EXPORTS
+//#       define CFMINIMAL_API __declspec(dllexport)
+//#   else
+//#       define CFMINIMAL_API __declspec(dllimport)
+//#   endif
+#   define CFMINIMAL_API  // currently not building this as a DLL ...
 #   ifdef _WIN64
 typedef __int64 ssize_t;
 #   else
@@ -37,12 +38,12 @@ typedef __int32 ssize_t;
 typedef const void *CFTypeRef;
 
 typedef ssize_t CFIndex;
-CFMINIMAL_API extern const CFIndex kCFNotFound;
+const CFIndex kCFNotFound = -1;
 typedef struct {
 	CFIndex location;
 	CFIndex length;
 } CFRange;
-CFMINIMAL_API extern const CFRange CFRangeZero;
+const CFRange CFRangeZero{ 0, 0 };
 
 inline CFRange CDECL CFRangeMake(CFIndex location, CFIndex length)
 {
