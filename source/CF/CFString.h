@@ -5,6 +5,7 @@
 
 #include "../util.h"
 
+#define UTF_CPP_CPLUSPLUS 201103L
 #include "../3rdparty/utfcpp/utf8.h"
 
 namespace cf {
@@ -71,8 +72,8 @@ namespace cf {
 
 		static StringRef makeConstantString(const char *cStr); // defined in the .cpp file because of some static variable stuff we don't expose here (annoying compiler warnings)
 
-		RETAIN_AND_AUTORELEASE(String)
-			WEAKREF_MAKE(String)
+		RETAIN_AND_AUTORELEASE(String);
+		WEAKREF_MAKE(String);
 	};
 
 } // end namespace cf
