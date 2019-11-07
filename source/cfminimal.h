@@ -42,7 +42,7 @@ typedef struct {
 	CFIndex location;
 	CFIndex length;
 } CFRange;
-CFMINIMAL_API extern const CFRange dl_CFRangeZero;
+CFMINIMAL_API extern const CFRange CFRangeZero;
 
 inline CFRange CDECL CFRangeMake(CFIndex location, CFIndex length)
 {

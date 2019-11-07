@@ -41,6 +41,10 @@ namespace cf {
 			}
 		}
 
+		static DictionaryRef create(ObjectRef *keys, ObjectRef *values, CFIndex numValues) {
+			return new Dictionary(keys, values, numValues);
+		}
+
 		~Dictionary() {
 			for (auto &i : dict) {
 				i.first->release();

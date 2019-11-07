@@ -26,8 +26,16 @@ namespace cf {
 
 		MutableAttributedString() : AttributedString() {}
 
+		static MutableAttributedStringRef create() {
+			return new MutableAttributedString();
+		}
+
 		MutableAttributedString(AttributedStringRef str) // ie, create mutable copy
 			:AttributedString(*str) {}
+
+		static MutableAttributedStringRef create(AttributedStringRef str) {
+			return new MutableAttributedString(str);
+		}
 
 		~MutableAttributedString() {
 			// release any uncommitted changes

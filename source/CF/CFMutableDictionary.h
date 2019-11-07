@@ -16,8 +16,16 @@ namespace cf {
 		explicit MutableDictionary(DictionaryRef copyFrom)
 			: Dictionary(copyFrom) {}
 
+		static MutableDictionaryRef create() {
+			return new MutableDictionary();
+		}
+
 		MutableDictionary(ObjectRef *keys, ObjectRef *values, CFIndex numValues)
 			: Dictionary(keys, values, numValues) {}
+
+		static MutableDictionaryRef create(ObjectRef *keys, ObjectRef *values, CFIndex numValues) {
+			return new MutableDictionary(keys, values, numValues);
+		}
 
 		void setValue(ObjectRef key, ObjectRef value) {
 			auto v2 = value->retain();

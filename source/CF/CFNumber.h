@@ -37,6 +37,10 @@ namespace cf {
 			}
 		}
 
+		static NumberRef create(CFNumberType theType, const void *valuePtr) {
+			return new Number(theType, valuePtr);
+		}
+
 		bool getValue(CFNumberType reqType, void *valuePtr) {
 			if (ourType == reqType) {
 				switch (reqType) {

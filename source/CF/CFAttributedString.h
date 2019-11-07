@@ -57,6 +57,10 @@ namespace cf {
 			ranges.push_back(dr);
 		}
 
+		static AttributedStringRef create(StringRef str, DictionaryRef attrs) {
+			return new AttributedString(str, attrs);
+		}
+
 		// ideally this constructor would only be visible to derived classes ...
 		AttributedString(StringRef str, std::vector<RangeAttrs> inRanges)
 			:str(str->copy())
