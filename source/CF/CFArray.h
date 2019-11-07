@@ -15,12 +15,12 @@ namespace cf {
 		TypeID getTypeID() const override { return kTypeIDArray; }
 		const char *getTypeName() const override { return "CFArray"; }
 
-		Array(ObjectRef *values, dl_CFIndex numValues) {
-			for (dl_CFIndex i = 0; i < numValues; i++) {
+		Array(ObjectRef *values, CFIndex numValues) {
+			for (CFIndex i = 0; i < numValues; i++) {
 				items.push_back(values[i]->retain());
 			}
 		}
-		inline static ArrayRef create(ObjectRef *values, dl_CFIndex numValues) {
+		inline static ArrayRef create(ObjectRef *values, CFIndex numValues) {
 			return new Array(values, numValues);
 		}
 
@@ -30,9 +30,9 @@ namespace cf {
 			}
 		}
 
-		dl_CFIndex getCount() { return (dl_CFIndex)items.size(); }
-		const ObjectRef getValueAtIndex(dl_CFIndex idx) {
-			if (idx >= 0 && idx < (dl_CFIndex)items.size()) {
+		CFIndex getCount() { return (CFIndex)items.size(); }
+		const ObjectRef getValueAtIndex(CFIndex idx) {
+			if (idx >= 0 && idx < (CFIndex)items.size()) {
 				return items[idx];
 			}
 			else {

@@ -7,7 +7,7 @@ namespace cf {
 	class Number; typedef Number* NumberRef;
 	class Number : public Object {
 	private:
-		dl_CFNumberType ourType;
+		CFNumberType ourType;
 		union {
 			float asFloat;
 			double asDouble;
@@ -17,19 +17,19 @@ namespace cf {
 		TypeID getTypeID() const override { return kTypeIDNumber; }
 		const char *getTypeName() const override { return "CFNumber"; }
 
-		Number(dl_CFNumberType theType, const void *valuePtr)
+		Number(CFNumberType theType, const void *valuePtr)
 			:ourType(theType)
 		{
 			switch (theType) {
-			case dl_kCFNumberFloat32Type:
-			case dl_kCFNumberFloatType:
+			case kCFNumberFloat32Type:
+			case kCFNumberFloatType:
 				value.asFloat = *((const float *)valuePtr);
 				break;
-			case dl_kCFNumberFloat64Type:
-			case dl_kCFNumberDoubleType:
+			case kCFNumberFloat64Type:
+			case kCFNumberDoubleType:
 				value.asDouble = *((const double *)valuePtr);
 				break;
-			case dl_kCFNumberIntType:
+			case kCFNumberIntType:
 				value.asInt = *((const int *)valuePtr);
 				break;
 			default:
@@ -37,18 +37,18 @@ namespace cf {
 			}
 		}
 
-		bool getValue(dl_CFNumberType reqType, void *valuePtr) {
+		bool getValue(CFNumberType reqType, void *valuePtr) {
 			if (ourType == reqType) {
 				switch (reqType) {
-				case dl_kCFNumberFloat32Type:
-				case dl_kCFNumberFloatType:
+				case kCFNumberFloat32Type:
+				case kCFNumberFloatType:
 					*((float *)valuePtr) = value.asFloat;
 					break;
-				case dl_kCFNumberFloat64Type:
-				case dl_kCFNumberDoubleType:
+				case kCFNumberFloat64Type:
+				case kCFNumberDoubleType:
 					*((double *)valuePtr) = value.asDouble;
 					break;
-				case dl_kCFNumberIntType:
+				case kCFNumberIntType:
 					*((int *)valuePtr) = value.asInt;
 					break;
 				default:
@@ -70,13 +70,13 @@ namespace cf {
 			}
 			else {
 				switch (ourType) {
-				case dl_kCFNumberFloat32Type:
-				case dl_kCFNumberFloatType:
+				case kCFNumberFloat32Type:
+				case kCFNumberFloatType:
 					return value.asFloat < bNumber.value.asFloat;
-				case dl_kCFNumberFloat64Type:
-				case dl_kCFNumberDoubleType:
+				case kCFNumberFloat64Type:
+				case kCFNumberDoubleType:
 					return value.asDouble < bNumber.value.asDouble;
-				case dl_kCFNumberIntType:
+				case kCFNumberIntType:
 					return value.asInt < bNumber.value.asInt;
 				default:
 					throw Exception("unhandled number type (on operator <)");
@@ -90,13 +90,13 @@ namespace cf {
 		};
 
 		static NumberRef numberWithFloat(float value) {
-			return new Number(dl_kCFNumberFloatType, &value);
+			return new Number(kCFNumberFloatType, &value);
 		}
 		static NumberRef numberWithDouble(double value) {
-			return new Number(dl_kCFNumberDoubleType, &value);
+			return new Number(kCFNumberDoubleType, &value);
 		}
 		static NumberRef numberWithInt(int value) {
-			return new Number(dl_kCFNumberIntType, &value);
+			return new Number(kCFNumberIntType, &value);
 		}
 
 		RETAIN_AND_AUTORELEASE(Number)

@@ -14,10 +14,10 @@ namespace cf {
 		MutableString() : String() {}
 		MutableString(const char *data) : String(data) {}
 
-		void replaceString(dl_CFRange range, StringRef replacement) {
+		void replaceString(CFRange range, StringRef replacement) {
 			assert(range.location >= 0);
 			assert(range.length >= 0);
-			assert(range.location + range.length <= (dl_CFIndex)str.length());
+			assert(range.location + range.length <= (CFIndex)str.length());
 			auto start = str.begin() + range.location;
 			auto end = start + range.length;
 			str.replace(start, end, replacement->getStdString());

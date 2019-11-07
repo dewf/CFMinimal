@@ -14,13 +14,13 @@ class AbstractRangeMananger
 {
 protected:
 	struct RangeSpec {
-		dl_CFRange range;
+		CFRange range;
 		B *spec;
 	};
 	std::vector<RangeSpec> ranges;
 
 	struct StartEndItem {
-		dl_CFIndex loc;     // location in layout text
+		CFIndex loc;     // location in layout text
 		size_t index;	 // more recent take priority (sorted later)
 		enum {
 			Start,
@@ -50,7 +50,7 @@ protected:
 public:
 	virtual ~AbstractRangeMananger() {}
 
-	void addRange(dl_CFRange range, B *spec) {
+	void addRange(CFRange range, B *spec) {
 		RangeSpec rs;
 		rs.range = range;
 		rs.spec = spec;
@@ -66,7 +66,7 @@ public:
 		for (size_t i = 0; i < ranges.size(); i++) {
 			auto &r = ranges[i];
 			locations.push_back({ r.range.location, i, StartEndItem::Start });
-			locations.push_back({ dl_CFRangeEnd(r.range), i, StartEndItem::End });
+			locations.push_back({ CFRangeEnd(r.range), i, StartEndItem::End });
 		}
 
 		// put the StartEndItems in order
@@ -97,7 +97,7 @@ public:
 				RangeSpec rs;
 				//rs.start = *lastLoc;
 				//rs.length = thisLoc - *lastLoc;
-				rs.range = dl_CFRangeMake(*lastLoc, thisLoc - *lastLoc);
+				rs.range = CFRangeMake(*lastLoc, thisLoc - *lastLoc);
 				rs.spec = accum;
 				applyRangeSpec(&rs);
 

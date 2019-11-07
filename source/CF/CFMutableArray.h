@@ -11,15 +11,15 @@ namespace cf {
 		const char *getTypeName() const override { return "CFMutableArray"; }
 
 		MutableArray() {}
-		MutableArray(ObjectRef *values, dl_CFIndex numValues)
+		MutableArray(ObjectRef *values, CFIndex numValues)
 			:Array(values, numValues) {}
 
 		void appendValue(ObjectRef value) {
 			items.push_back(value->retain());
 		}
 
-		void insertValueAtIndex(dl_CFIndex idx, const ObjectRef value) {
-			if (idx >= 0 && idx <= (dl_CFIndex)items.size()) {
+		void insertValueAtIndex(CFIndex idx, const ObjectRef value) {
+			if (idx >= 0 && idx <= (CFIndex)items.size()) {
 				items.insert(items.begin() + idx, value->retain());
 			}
 			else {
@@ -36,7 +36,7 @@ namespace cf {
 
 		virtual ArrayRef copy() override {
 			// mutable, so we have to make an immutable copy
-			return new Array(items.data(), (dl_CFIndex)items.size());
+			return new Array(items.data(), (CFIndex)items.size());
 		}
 
 		RETAIN_AND_AUTORELEASE(MutableArray)

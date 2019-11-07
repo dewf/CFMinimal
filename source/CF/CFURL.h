@@ -11,7 +11,7 @@ namespace cf {
 	class URL : public Object {
 	private:
 		StringRef filePath;
-		dl_CFURLPathStyle pathStyle;
+		CFURLPathStyle pathStyle;
 		bool isDirectory;
 
 		static StringRef backslash;
@@ -20,15 +20,15 @@ namespace cf {
 		TypeID getTypeID() const override { return kTypeIDURL; }
 		const char *getTypeName() const override { return "CFURL"; }
 
-		URL(StringRef filePath, dl_CFURLPathStyle pathStyle, bool isDirectory)
+		URL(StringRef filePath, CFURLPathStyle pathStyle, bool isDirectory)
 			:pathStyle(pathStyle),
 			isDirectory(isDirectory)
 		{
-			if (pathStyle == dl_kCFURLPOSIXPathStyle) {
+			if (pathStyle == kCFURLPOSIXPathStyle) {
 				// we're good, same as internal format
 				this->filePath = filePath->copy();
 			}
-			else if (pathStyle == dl_kCFURLWindowsPathStyle) {
+			else if (pathStyle == kCFURLWindowsPathStyle) {
 				auto _mutable = filePath->createMutableCopy();
 				_mutable->replaceAll(backslash, fwdslash);
 				this->filePath = _mutable->copy();
@@ -39,7 +39,7 @@ namespace cf {
 			}
 		}
 
-		static URLRef createWithFileSystemPath(StringRef filePath, dl_CFURLPathStyle pathStyle, bool isDirectory) {
+		static URLRef createWithFileSystemPath(StringRef filePath, CFURLPathStyle pathStyle, bool isDirectory) {
 			return new URL(filePath, pathStyle, isDirectory);
 		}
 
@@ -47,8 +47,8 @@ namespace cf {
 			filePath->release();
 		}
 
-		StringRef copyFileSystemPath(dl_CFURLPathStyle pathStyle) {
-			if (pathStyle == dl_kCFURLWindowsPathStyle) {
+		StringRef copyFileSystemPath(CFURLPathStyle pathStyle) {
+			if (pathStyle == kCFURLWindowsPathStyle) {
 				// convert back, we store internally as POSIX
 				auto _mutable = filePath->createMutableCopy();
 				_mutable->replaceAll(fwdslash, backslash);
@@ -56,7 +56,7 @@ namespace cf {
 				_mutable->release();
 				return ret;
 			}
-			else if (pathStyle == dl_kCFURLPOSIXPathStyle) {
+			else if (pathStyle == kCFURLPOSIXPathStyle) {
 				// nothing to do, matches internal format
 				return filePath->copy();
 			}

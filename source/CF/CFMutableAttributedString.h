@@ -10,11 +10,11 @@ namespace cf {
 	class MutableAttributedString : public AttributedString {
 	private:
 		void coalesce(); // merge all the queued changes in with the existing ranges
-		void deleteRange(dl_CFRange delRange);
-		void insertRange(dl_CFRange insRange);
+		void deleteRange(CFRange delRange);
+		void insertRange(CFRange insRange);
 		//
 		struct QueuedChange {
-			dl_CFRange range;
+			CFRange range;
 			StringRef key;
 			ObjectRef value;
 		};
@@ -47,9 +47,9 @@ namespace cf {
 			}
 		}
 
-		void replaceString(dl_CFRange replRange, StringRef replacement);
+		void replaceString(CFRange replRange, StringRef replacement);
 
-		void setAttribute(dl_CFRange range, StringRef attrName, ObjectRef value) {
+		void setAttribute(CFRange range, StringRef attrName, ObjectRef value) {
 			QueuedChange qc;
 			qc.range = range;
 			qc.key = attrName->copy();

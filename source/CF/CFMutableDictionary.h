@@ -16,7 +16,7 @@ namespace cf {
 		explicit MutableDictionary(DictionaryRef copyFrom)
 			: Dictionary(copyFrom) {}
 
-		MutableDictionary(ObjectRef *keys, ObjectRef *values, dl_CFIndex numValues)
+		MutableDictionary(ObjectRef *keys, ObjectRef *values, CFIndex numValues)
 			: Dictionary(keys, values, numValues) {}
 
 		void setValue(ObjectRef key, ObjectRef value) {
@@ -48,7 +48,7 @@ namespace cf {
 				keys.push_back(i.first);
 				values.push_back(i.second);
 			}
-			return new Dictionary(keys.data(), values.data(), (dl_CFIndex)dict.size());
+			return new Dictionary(keys.data(), values.data(), (CFIndex)dict.size());
 		}
 
 		RETAIN_AND_AUTORELEASE(MutableDictionary);

@@ -26,16 +26,16 @@ namespace cf {
 		}
 
 		// createWithSubstring
-		String(StringRef source, dl_CFRange range) {
+		String(StringRef source, CFRange range) {
 			str = source->str.substr(range.location, range.length);
 		}
-		inline static StringRef createWithSubstring(StringRef source, dl_CFRange range) {
+		inline static StringRef createWithSubstring(StringRef source, CFRange range) {
 			return new String(source, range);
 		}
 
-		dl_CFIndex getLength() { return (dl_CFIndex)str.length(); }
+		CFIndex getLength() { return (CFIndex)str.length(); }
 
-		dl_CFRange find(StringRef toFind, dl_CFStringCompareFlags compareOptions);
+		CFRange find(StringRef toFind, CFStringCompareFlags compareOptions);
 
 		std::string getStdString() {
 			return str;

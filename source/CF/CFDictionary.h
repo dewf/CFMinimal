@@ -33,8 +33,8 @@ namespace cf {
 			}
 		}
 
-		Dictionary(ObjectRef *keys, ObjectRef *values, dl_CFIndex numValues) {
-			for (dl_CFIndex i = 0; i < numValues; i++) {
+		Dictionary(ObjectRef *keys, ObjectRef *values, CFIndex numValues) {
+			for (CFIndex i = 0; i < numValues; i++) {
 				auto key = keys[i]->copy();
 				auto value = values[i]->retain();
 				dict[key] = value;
@@ -48,8 +48,8 @@ namespace cf {
 			}
 		}
 
-		dl_CFIndex getCount() {
-			return (dl_CFIndex)dict.size();
+		CFIndex getCount() {
+			return (CFIndex)dict.size();
 		}
 
 		ObjectRef getValue(ObjectRef key) {

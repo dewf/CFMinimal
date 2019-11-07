@@ -26,15 +26,15 @@ StringRef String::makeConstantString(const char *cStr)
 	}
 }
 
-dl_CFRange String::find(StringRef toFind, dl_CFStringCompareFlags compareOptions)
+CFRange String::find(StringRef toFind, CFStringCompareFlags compareOptions)
 {
-	auto supportedFlags = dl_kCFCompareCaseInsensitive;
+	auto supportedFlags = kCFCompareCaseInsensitive;
 	if (compareOptions & ~supportedFlags) {
 		throw Exception("String::find - unsupported compare option flags");
 	}
 	// else
 	std::string::iterator found = str.end();
-	if (compareOptions & dl_kCFCompareCaseInsensitive) {
+	if (compareOptions & kCFCompareCaseInsensitive) {
 		found = std::search(
 			str.begin(), str.end(),
 			toFind->str.begin(), toFind->str.end(),
@@ -44,14 +44,14 @@ dl_CFRange String::find(StringRef toFind, dl_CFStringCompareFlags compareOptions
 	else {
 		auto index = str.find(toFind->str, 0);
 		if (index != std::string::npos) {
-			return dl_CFRangeMake((dl_CFIndex)index, (dl_CFIndex)toFind->str.length());
+			return CFRangeMake((CFIndex)index, (CFIndex)toFind->str.length());
 		}
 	}
 	if (found != str.end()) {
-		return dl_CFRangeMake((dl_CFIndex)(found - str.begin()), (dl_CFIndex)toFind->str.length());
+		return CFRangeMake((CFIndex)(found - str.begin()), (CFIndex)toFind->str.length());
 	}
 	// else
-	return dl_CFRangeMake(-1, 0);
+	return CFRangeMake(-1, 0);
 }
 
 // defined here because of circular dependencies

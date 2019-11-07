@@ -10,7 +10,7 @@ namespace cf {
 	class AttributedString : public Object {
 	public:
 		struct RangeAttrs {
-			dl_CFRange range;
+			CFRange range;
 			DictionaryRef attrs;
 		};
 	protected:
@@ -33,7 +33,7 @@ namespace cf {
 		}
 
 		// createWithSubstring
-		AttributedString(AttributedStringRef source, dl_CFRange range)
+		AttributedString(AttributedStringRef source, CFRange range)
 			:str(String::createWithSubstring(source->str, range))
 		{
 			if (range.length != 0 || range.length != str->getLength()) {
@@ -42,7 +42,7 @@ namespace cf {
 				// shouldn't be tooo difficult
 			}
 		}
-		inline static AttributedStringRef createWithSubstring(AttributedStringRef source, dl_CFRange range) {
+		inline static AttributedStringRef createWithSubstring(AttributedStringRef source, CFRange range) {
 			return new AttributedString(source, range);
 		}
 
@@ -52,7 +52,7 @@ namespace cf {
 			// todo: need to verify the key type of the dictionary ...
 			// create a single range covering the entire string length, with a copy of the dictionary
 			RangeAttrs dr;
-			dr.range = dl_CFRangeMake(0, str->getLength());
+			dr.range = CFRangeMake(0, str->getLength());
 			dr.attrs = attrs->copy();
 			ranges.push_back(dr);
 		}
@@ -78,7 +78,7 @@ namespace cf {
 
 		const StringRef getString() const { return str; }
 
-		dl_CFIndex getLength() const { return str->getLength(); }
+		CFIndex getLength() const { return str->getLength(); }
 
 		std::vector<RangeAttrs> getRanges() {
 			return ranges;
@@ -96,7 +96,7 @@ namespace cf {
 		void dump() {
 			printf("AttrString: [%s]\n", str->toString().c_str());
 			for (auto &range : ranges) {
-				printf(" - range [%td,%td)\n", range.range.location, dl_CFRangeEnd(range.range));
+				printf(" - range [%td,%td)\n", range.range.location, CFRangeEnd(range.range));
 				auto count = range.attrs->getCount();
 				auto keys = new ObjectRef[count];
 				auto values = new ObjectRef[count];

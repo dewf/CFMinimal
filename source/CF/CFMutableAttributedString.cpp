@@ -16,24 +16,24 @@ enum RangeOverlapType {
 	AEntirelyContainsB,  //Start(A) <= Start(B) && End(A) => End(B)
 	Error
 };
-RangeOverlapType GetRangeOverlap(dl_CFRange a, dl_CFRange b)
+RangeOverlapType GetRangeOverlap(CFRange a, CFRange b)
 {
-	if (dl_CFRangeEnd(a) <= b.location) {
+	if (CFRangeEnd(a) <= b.location) {
 		return AEntirelyBeforeB;
 	}
-	else if (a.location >= dl_CFRangeEnd(b)) {
+	else if (a.location >= CFRangeEnd(b)) {
 		return AEntirelyAfterB;
 	}
-	else if (a.location <= b.location && dl_CFRangeEnd(a) < dl_CFRangeEnd(b)) {
+	else if (a.location <= b.location && CFRangeEnd(a) < CFRangeEnd(b)) {
 		return AOverlapsBStart;
 	}
-	else if (a.location > b.location && dl_CFRangeEnd(a) >= dl_CFRangeEnd(b)) {
+	else if (a.location > b.location && CFRangeEnd(a) >= CFRangeEnd(b)) {
 		return AOverlapsBEnd;
 	}
-	else if (a.location > b.location && dl_CFRangeEnd(a) < dl_CFRangeEnd(b)) {
+	else if (a.location > b.location && CFRangeEnd(a) < CFRangeEnd(b)) {
 		return AEntirelyInsideB;
 	}
-	else if (a.location <= b.location && dl_CFRangeEnd(a) >= dl_CFRangeEnd(b)) {
+	else if (a.location <= b.location && CFRangeEnd(a) >= CFRangeEnd(b)) {
 		return AEntirelyContainsB;
 	}
 	// should never get here
@@ -41,7 +41,7 @@ RangeOverlapType GetRangeOverlap(dl_CFRange a, dl_CFRange b)
 	return Error;
 }
 
-void MutableAttributedString::deleteRange(dl_CFRange delRange) {
+void MutableAttributedString::deleteRange(CFRange delRange) {
 	// first delete and adjust lengths of any ranges overlapping with the range param
 	auto oldRanges = ranges;
 	ranges.clear();
@@ -54,8 +54,8 @@ void MutableAttributedString::deleteRange(dl_CFRange delRange) {
 		}
 		case AOverlapsBStart: {
 			// push range's beginning
-			auto bEnd = dl_CFRangeEnd(i->range);
-			auto bStart = dl_CFRangeEnd(delRange);
+			auto bEnd = CFRangeEnd(i->range);
+			auto bStart = CFRangeEnd(delRange);
 			i->range.location = bStart;
 			i->range.length = bEnd - bStart;
 			break;
@@ -79,21 +79,21 @@ void MutableAttributedString::deleteRange(dl_CFRange delRange) {
 		ranges.push_back(*i);
 	}
 	// collapse gaps
-	dl_CFIndex index = 0;
+	CFIndex index = 0;
 	for (auto i = ranges.begin(); i != ranges.end(); i++) {
 		i->range.location = index;
 		index += i->range.length;
 	}
 }
 
-void MutableAttributedString::insertRange(dl_CFRange insRange) {
+void MutableAttributedString::insertRange(CFRange insRange) {
 	// find which range contains the insert location, and add the insert length to it
 	// then fixup the loc of all the ranges after it
 	bool postInsert = false;
-	dl_CFIndex index = 0;
+	CFIndex index = 0;
 	for (auto i = ranges.begin(); i != ranges.end(); i++) {
 		if (insRange.location >= i->range.location &&
-			insRange.location <= dl_CFRangeEnd(i->range))
+			insRange.location <= CFRangeEnd(i->range))
 		{
 			i->range.length += insRange.length;
 			postInsert = true;
@@ -105,7 +105,7 @@ void MutableAttributedString::insertRange(dl_CFRange insRange) {
 	}
 }
 
-void MutableAttributedString::replaceString(dl_CFRange replRange, StringRef replacement) {
+void MutableAttributedString::replaceString(CFRange replRange, StringRef replacement) {
 	if (isEditing) {
 		// sorry, have to do it
 		coalesce();
@@ -118,7 +118,7 @@ void MutableAttributedString::replaceString(dl_CFRange replRange, StringRef repl
 	str = mut->copy();
 	mut->release();
 	deleteRange(replRange);
-	insertRange(dl_CFRangeMake(replRange.location, replacement->getLength()));
+	insertRange(CFRangeMake(replRange.location, replacement->getLength()));
 }
 
 // helper class to manage attributed range updates
