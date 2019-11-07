@@ -161,6 +161,7 @@
     <ClCompile Include="..\..\..\source\CF\CFObject.cpp" />
     <ClCompile Include="..\..\..\source\CF\CFString.cpp" />
     <ClCompile Include="..\..\..\source\CF\CFURL.cpp" />
+    <ClCompile Include="..\..\..\source\util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\AbstractRangeManager.h" />
@@ -179,6 +180,7 @@
     <ClInclude Include="..\..\..\source\CF\CFString.h" />
     <ClInclude Include="..\..\..\source\CF\CFTypes.h" />
     <ClInclude Include="..\..\..\source\CF\CFURL.h" />
+    <ClInclude Include="..\..\..\source\util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -12,7 +12,14 @@ namespace cf {
 		const char *getTypeName() const override { return "CFMutableString"; }
 
 		MutableString() : String() {}
-		MutableString(const char *data) : String(data) {}
+		//MutableString(const char *data) : String(data) {}
+
+		MutableString(const String *source)
+			: String(*source) {}
+
+		static MutableStringRef createFromString(StringRef other) {
+			return new MutableString(other);
+		}
 
 		void replaceString(CFRange range, StringRef replacement) {
 			assert(range.location >= 0);
@@ -35,21 +42,17 @@ namespace cf {
 
 		virtual std::string toString() const override {
 			char buffer[1024];
-			snprintf(buffer, 1024, "MutableString@%p: {%s} [%s]", this, str.c_str(), Object::toString().c_str());
+			snprintf(buffer, 1024, "MutableString@%p: {%ls} [%s]", this, str.c_str(), Object::toString().c_str());
 			return std::string(buffer);
 		}
 
 		StringRef copy() override {
 			// make immutable copy
-			return new String(str.c_str());
+			return new String(*this);
 		}
 
-		static MutableStringRef createFromString(StringRef str) {
-			return new MutableString(str->getStdString().c_str());
-		}
-
-		RETAIN_AND_AUTORELEASE(MutableString)
-			WEAKREF_MAKE(MutableString)
+		RETAIN_AND_AUTORELEASE(MutableString);
+		WEAKREF_MAKE(MutableString);
 	};
 }
 

@@ -60,6 +60,9 @@
     <ClCompile Include="..\..\..\source\CF\CFURL.cpp">
       <Filter>Source Files\CF</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\util.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\AbstractRangeManager.h">
@@ -109,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\source\cfminimal.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\util.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

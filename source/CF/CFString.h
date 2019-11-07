@@ -1,7 +1,9 @@
-#ifndef __CF_STRING_H__
+﻿#ifndef __CF_STRING_H__
 #define __CF_STRING_H__
 
 #include "CFObject.h"
+
+#include "../util.h"
 
 namespace cf {
 
@@ -10,16 +12,19 @@ namespace cf {
 	class String; typedef String* StringRef;
 	class String : public Object {
 	protected:
-		std::string str;
+		std::wstring str;
 	public:
 		TypeID getTypeID() const override { return kTypeIDString; }
 		const char *getTypeName() const override { return "CFString"; }
 
 		String() {}
 
+		String(const String &other)
+			:str(other.str) {}
+
 		// createWithCString
 		String(const char *cStr) {
-			str = cStr;
+			str = utf8_to_wstring(cStr);
 		}
 		inline static StringRef createWithCString(const char *cStr) {
 			return new String(cStr);
@@ -37,8 +42,12 @@ namespace cf {
 
 		CFRange find(StringRef toFind, CFStringCompareFlags compareOptions);
 
-		std::string getStdString() {
+		std::wstring getStdString() {
 			return str;
+		}
+
+		std::string getUtf8String() {
+			return wstring_to_utf8(str);
 		}
 
 		virtual bool operator <(const Object &b) const override {
@@ -47,7 +56,7 @@ namespace cf {
 		}
 
 		virtual std::string toString() const override {
-			return sprintfToStdString("String@%p: {%s} [%s]", this, str.c_str(), Object::toString().c_str());
+			return sprintfToStdString("String@%p: {%s} [%ls]", this, str.c_str(), Object::toString().c_str());
 		}
 
 		virtual StringRef copy() override {
