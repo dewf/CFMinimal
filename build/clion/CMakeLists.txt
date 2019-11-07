@@ -3,6 +3,8 @@ project(cfminimal)
 
 set(CMAKE_CXX_STANDARD 14)
 
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)  # apparently necessary to link with OpenDL
+
 set(SOURCE_FILES
         ../../source/CF/CFArray.cpp
         ../../source/CF/CFAttributedString.cpp
