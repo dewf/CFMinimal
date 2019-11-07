@@ -10,7 +10,7 @@
 
 #include <assert.h>
 
-#include "../dlcf.h"
+#include "../cfminimal.h"
 
 std::string sprintfToStdString(const char *fmt, ...);
 

@@ -7,7 +7,7 @@
 #include <algorithm>
 #include <assert.h>
 
-#include "dlcf.h"
+#include "cfminimal.h"
 
 template <class A, class B>
 class AbstractRangeMananger

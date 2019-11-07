@@ -164,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\source\AbstractRangeManager.h" />
+    <ClInclude Include="..\..\..\source\cfminimal.h" />
     <ClInclude Include="..\..\..\source\CF\CFArray.h" />
     <ClInclude Include="..\..\..\source\CF\CFAttributedString.h" />
     <ClInclude Include="..\..\..\source\CF\CFBoolean.h" />

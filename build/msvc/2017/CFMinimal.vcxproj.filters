@@ -107,5 +107,8 @@
     <ClInclude Include="..\..\..\source\CF\CFURL.h">
       <Filter>Source Files\CF</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\source\cfminimal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
