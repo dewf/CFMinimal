@@ -76,7 +76,7 @@ namespace cf {
 		}
 
 		virtual std::string toString() const override {
-			return sprintfToStdString("URL@%p: {%s} [%s]", this, filePath->getStdString().c_str(), Object::toString().c_str());
+			return sprintfToStdString("URL@%p: {%s} [%s]", this, filePath->getUtf8String().c_str(), Object::toString().c_str());
 		}
 
 		RETAIN_AND_AUTORELEASE(URL)

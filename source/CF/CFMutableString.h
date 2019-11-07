@@ -27,12 +27,12 @@ namespace cf {
 			assert(range.location + range.length <= (CFIndex)str.length());
 			auto start = str.begin() + range.location;
 			auto end = start + range.length;
-			str.replace(start, end, replacement->getStdString());
+			str.replace(start, end, replacement->getUtf16String());
 		}
 
 		void replaceAll(StringRef toFind, StringRef replaceWith) {
-			auto find_std = toFind->getStdString();
-			auto repl_std = replaceWith->getStdString();
+			auto find_std = toFind->getUtf16String();
+			auto repl_std = replaceWith->getUtf16String();
 			auto pos = str.find(find_std);
 			while (pos != str.npos) {
 				str.replace(pos, find_std.length(), repl_std);
@@ -42,7 +42,8 @@ namespace cf {
 
 		virtual std::string toString() const override {
 			char buffer[1024];
-			snprintf(buffer, 1024, "MutableString@%p: {%ls} [%s]", this, str.c_str(), Object::toString().c_str());
+			auto x = utf8::utf16to8(str);
+			snprintf(buffer, 1024, "MutableString@%p: {%s} [%s]", this, x.c_str(), Object::toString().c_str());
 			return std::string(buffer);
 		}
 

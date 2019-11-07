@@ -5,6 +5,8 @@
 
 #include "../util.h"
 
+#include "../3rdparty/utfcpp/utf8.h"
+
 namespace cf {
 
 	// STRING CLASS ====================================
@@ -12,7 +14,7 @@ namespace cf {
 	class String; typedef String* StringRef;
 	class String : public Object {
 	protected:
-		std::wstring str;
+		std::u16string str;
 	public:
 		TypeID getTypeID() const override { return kTypeIDString; }
 		const char *getTypeName() const override { return "CFString"; }
@@ -24,7 +26,7 @@ namespace cf {
 
 		// createWithCString
 		String(const char *cStr) {
-			str = utf8_to_wstring(cStr);
+		    str = utf8::utf8to16(cStr);
 		}
 		inline static StringRef createWithCString(const char *cStr) {
 			return new String(cStr);
@@ -42,12 +44,12 @@ namespace cf {
 
 		CFRange find(StringRef toFind, CFStringCompareFlags compareOptions);
 
-		std::wstring getStdString() {
-			return str;
+		std::u16string getUtf16String() {
+		    return str;
 		}
 
 		std::string getUtf8String() {
-			return wstring_to_utf8(str);
+		    return utf8::utf16to8(str);
 		}
 
 		virtual bool operator <(const Object &b) const override {
@@ -56,7 +58,8 @@ namespace cf {
 		}
 
 		virtual std::string toString() const override {
-			return sprintfToStdString("String@%p: {%s} [%ls]", this, str.c_str(), Object::toString().c_str());
+		    auto utf8 = utf8::utf16to8(str);
+			return sprintfToStdString("String@%p: {%s} [%s]", this, utf8.c_str(), Object::toString().c_str());
 		}
 
 		virtual StringRef copy() override {

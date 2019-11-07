@@ -9,9 +9,9 @@ using namespace cf;
 
 StringRef String::makeConstantString(const char *cStr)
 {
-	static std::map<std::wstring, StringRef> constantStrings; // if this is outside the function there's no guarantee it's initialized before first use
+	static std::map<std::u16string, StringRef> constantStrings; // if this is outside the function there's no guarantee it's initialized before first use
 	//
-	auto key = utf8_to_wstring(cStr);
+	auto key = utf8::utf8to16(cStr);
 
 	auto found = constantStrings.find(key);
 	if (found != constantStrings.end()) {
@@ -33,7 +33,7 @@ CFRange String::find(StringRef toFind, CFStringCompareFlags compareOptions)
 		throw Exception("String::find - unsupported compare option flags");
 	}
 	// else
-	std::wstring::iterator found = str.end();
+	std::u16string::iterator found = str.end();
 	if (compareOptions & kCFCompareCaseInsensitive) {
 		found = std::search(
 			str.begin(), str.end(),

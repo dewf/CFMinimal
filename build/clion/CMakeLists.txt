@@ -20,6 +20,7 @@ set(SOURCE_FILES
         ../../source/CF/CFString.cpp
         ../../source/CF/CFURL.cpp
         ../../source/AbstractRangeManager.cpp
+        ../../source/util.cpp
         )
 
 add_library(cfminimal ${SOURCE_FILES})
