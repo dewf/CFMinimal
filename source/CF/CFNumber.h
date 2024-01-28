@@ -12,6 +12,7 @@ namespace cf {
 			float asFloat;
 			double asDouble;
 			int asInt;
+			long asLong;
 		} value;
 	public:
 		TypeID getTypeID() const override { return kTypeIDNumber; }
@@ -31,6 +32,9 @@ namespace cf {
 				break;
 			case kCFNumberIntType:
 				value.asInt = *((const int *)valuePtr);
+				break;
+			case kCFNumberLongType:
+				value.asLong = *((const long*)valuePtr);
 				break;
 			default:
 				throw Exception("unhandled number type (on write)");
@@ -54,6 +58,9 @@ namespace cf {
 					break;
 				case kCFNumberIntType:
 					*((int *)valuePtr) = value.asInt;
+					break;
+				case kCFNumberLongType:
+					*((long*)valuePtr) = value.asLong;
 					break;
 				default:
 					throw Exception("unhandled number type (on read)");
@@ -82,6 +89,8 @@ namespace cf {
 					return value.asDouble < bNumber.value.asDouble;
 				case kCFNumberIntType:
 					return value.asInt < bNumber.value.asInt;
+				case kCFNumberLongType:
+					return value.asLong < bNumber.value.asLong;
 				default:
 					throw Exception("unhandled number type (on operator <)");
 				}
@@ -101,6 +110,9 @@ namespace cf {
 		}
 		static NumberRef numberWithInt(int value) {
 			return new Number(kCFNumberIntType, &value);
+		}
+		static NumberRef numberWithLong(long value) {
+			return new Number(kCFNumberLongType, &value);
 		}
 
 		RETAIN_AND_AUTORELEASE(Number)
