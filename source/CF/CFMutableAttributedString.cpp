@@ -144,8 +144,8 @@ public:
 		for (int i = 0; i < count; i++) {
 			accum->setValue(keys[i], values[i]);
 		}
-		delete keys;
-		delete values;
+		delete[] keys;
+		delete[] values;
 	};
 
 	void applyRangeSpec(RangeSpec *rangeSpec) override {
