@@ -18,13 +18,16 @@ namespace cf {
 
 	// EXCEPTION OBJECT ================================
 	class Exception : public std::exception {
-		std::string reason;
-		const char *what() const throw() override {
-			return reason.c_str();
-		}
+		std::string _reason;
 	public:
-		Exception(const char *reason) {
-			this->reason = reason;
+		const char* what() const throw() override {
+			return _reason.c_str();
+		}
+		Exception(const char* reason) {
+			this->_reason = reason;
+		}
+		std::string reason() {
+			return _reason;
 		}
 	};
 
